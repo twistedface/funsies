@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>brainless's scam</title>
+<link rel="icon" type="image/gif" href="cat.png">
+<style>
+  body {
+    background: black;
+    color: #00ff6a;
+    font-family: "Courier New", monospace;
+    margin: 0;
+    overflow: hidden;
+    height: 100vh;
+  }
+
+  /* Matrix falling text background */
+  canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
+
+  .center-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    padding: 40px;
+    border: 1px solid #00ff6a;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 500px;
+    background: rgba(0, 0, 0, 0.7);
+    animation: fadeIn 1.2s ease-out forwards;
+    opacity: 0;
+  }
+
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+
+  /* Infinite loading bar */
+  .loading-bar {
+    width: 100%;
+    height: 15px;
+    background: #003d1f;
+    margin-top: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .loading-fill {
+    height: 100%;
+    width: 0%;
+    background: hwb(145 0% 0%);
+    animation: loading 3s infinite linear;
+  }
+
+  @keyframes loading {
+    0% { width: 0%; }
+    60% { width: 90%; }
+    100% { width: 0%; }
+  }
+
+  .disclaimer {
+    margin-top: 15px;
+    font-size: 0.75rem;
+    color: #66ffb3;
+  }
+  
+</style>
+</head>
+
+<body>
+
+<canvas id="matrix"></canvas>
+
+<div class="center-box">
+  <h2>⚠ SYSTEM ALERT ⚠</h2>
+  <p>Suspicious Activity Detected<br>Initializing Security Scan...</p>
+
+  <div class="loading-bar">
+    <div class="loading-fill"></div>
+  </div>
+
+  <p style="margin-top: 20px;">
+    Please stand by.<br>
+    Your data is being <span style="color:#ff5555;">analysed</span> for my enterntainment.
+  </p>
+
+  <div class="disclaimer">
+    you just got scammed.
+  </div>
+</div>
+
+<script>
+  // Matrix animation
+  const canvas = document.getElementById("matrix");
+  const ctx = canvas.getContext("2d");
+
+  canvas.height = window.innerHeight;
+  canvas.width = window.innerWidth;
+
+  const letters = "01";
+  const fontSize = 16;
+  const columns = canvas.width / fontSize;
+  const drops = [];
+
+  for (let i = 0; i < columns; i++) {
+    drops[i] = 1;
+  }
+
+  function draw() {
+    ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = "#00ff6a";
+    ctx.font = fontSize + "px monospace";
+
+    for (let i = 0; i < drops.length; i++) {
+      const text = letters[Math.floor(Math.random() * letters.length)];
+      ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+      if (drops[i] * fontSize > canvas.height && Math.random() > 0.95) {
+        drops[i] = 0;
+      }
+      drops[i]++;
+    }
+  }
+
+  setInterval(draw, 40);
+</script>
+</body>
+</html>
